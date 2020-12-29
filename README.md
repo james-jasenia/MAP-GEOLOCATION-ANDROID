@@ -46,3 +46,43 @@ Google uses the Geocoder object to provide an address for any given latitude and
                     e.printStackTrace();
                 }
 ```
+
+## Considerations:
+### API Key
+You need to an API Key from Google. You are able to set restrictions on this key so that the same key can be used in a variety of app across a variety of platforms or it can only be used for an individual app. The API Key is stored in the google_maps_api.xml file. 
+```
+<string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">ENTER_STRING</string>
+```
+
+### Permissions
+You need to ask the user for permissions to access the devices location services. Like all permissions, you can declare your intent to access the location services on the device. 
+
+```
+<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
+```
+
+In order to request permission for location services, you can use the .requestPermission() method. 
+
+```
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+        }
+```
+
+You use the onRequestPermissionsResult() to handle the outcome of this request. In the example below, it might have been cleaner to use the requestCode in the if statement. Keep in mind that this function is only called after the user as interacted with the permissions request (maybe once in the lifetime of the app).
+
+```
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+            }
+        } else {
+            //Alert the user that the app cannot function as expected due to denial of user permissions
+            Log.i("User Permissions", "User Permissions denied");
+        }
+    }
+```
