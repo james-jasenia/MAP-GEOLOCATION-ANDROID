@@ -4,4 +4,30 @@
 ### Purpose: 
 The purpose of this app is to explore the Google Maps API and practise working with the Location Manager and Location Listener objects.
 
-###
+### LocationManager
+The LocationManager allows you access the systems location services such as the GPS. This object will receieve preiodic updates on the devices geographical location. You can control the frequency in which you receieve location updates as well as the provider (GPS, Network, etc) using the .requestLocationUpdates() method.
+
+```
+locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+```
+
+Note: Location Permission must granted in order for the LocationManager to receieve updates.
+
+### LocationListener
+The LocationListener is responsible for receiving notifcations from the LocationManager. The important method is onLocationChanged(Location location) which is called when the LocationManager notifies the LocationListener that the location has changed. As onLocationChanged(Location location) is an event, you should put any relevant UI update logic here.
+
+```
+locationListener = new LocationListener() {
+
+            @Override
+            public void onLocationChanged(@NonNull Location location) {
+                //Init a new LatLng object using the current locations latitude and longitude.
+                LatLng currentLatLng = new LatLng(location.getLatitude(), location.getLongitude());
+
+                //Add and format the marker using the currentLatLng object
+                mMap.addMarker(new MarkerOptions().position(currentLatLng).title("You are here")).setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 12));
+
+```
+
+### GoogleMap
