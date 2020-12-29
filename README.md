@@ -1,5 +1,5 @@
 # Map Geolocation Prototype - Android
-### James Jasenia
+## James Jasenia
 #### Tutorial: The Complete Android Oreo Developer Course - Section 6
 
 ### Purpose: 
