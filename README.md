@@ -1,9 +1,11 @@
 # Map Geolocation Prototype - Android
 ##### Tutorial: The Complete Android Oreo Developer Course - Section 6
 
-### Purpose: 
+## Purpose: 
 The purpose of this app is to explore the Google Maps API and practise working with the Location Manager and Location Listener objects.
 
+
+## Key Classes:
 ### LocationManager
 The LocationManager allows you access the systems location services such as the GPS. This object will receieve preiodic updates on the devices geographical location. You can control the frequency in which you receieve location updates as well as the provider (GPS, Network, etc) using the .requestLocationUpdates() method.
 
