@@ -1,5 +1,3 @@
-# MapGeolocationPrototype
-
 # Map Geolocation Prototype - Android
 ### James Jasenia
 
